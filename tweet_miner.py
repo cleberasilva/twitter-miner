@@ -1,18 +1,17 @@
-from tweepy import API, Cursor, OAuthHandler, Stream, StreamListener
+import os
+import re
 
 import numpy as np
 import pandas as pd
-import re
-import os
-
-from textblob import TextBlob
 from dotenv import load_dotenv
+from textblob import TextBlob
+from tweepy import API, Cursor, OAuthHandler, Stream, StreamListener
 
 load_dotenv()
 
 
-
 class TwitterClient:
+    
     def __init__(self, twitter_user=None):
         self.auth = TwitterAuthenticator().authenticate()
         self.twitter_client = API(self.auth)
