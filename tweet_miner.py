@@ -2,7 +2,6 @@ from tweepy import API, Cursor, OAuthHandler, Stream, StreamListener
 
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import re
 import os
 
@@ -10,6 +9,8 @@ from textblob import TextBlob
 from dotenv import load_dotenv
 
 load_dotenv()
+
+
 
 class TwitterClient:
     def __init__(self, twitter_user=None):
@@ -48,8 +49,10 @@ class TwitterClient:
 
 class TwitterAuthenticator:
     def authenticate(self):
-        auth = OAuthHandler(os.getenv('CONSUMER_KEY'), os.getenv('CONSUMER_SECRET'))
-        auth.set_access_token(os.getenv('ACCESS_TOKEN'), os.getenv('ACCESS_TOKEN_SECRET'))
+        auth = OAuthHandler(os.getenv("CONSUMER_KEY"), os.getenv("CONSUMER_SECRET"))
+        auth.set_access_token(
+            os.getenv("ACCESS_TOKEN"), os.getenv("ACCESS_TOKEN_SECRET")
+        )
         return auth
 
 
@@ -92,7 +95,7 @@ class TweetAnalyzer:
     def clean_tweet(self, tweet):
         return " ".join(
             re.sub(
-                "(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet
+                "(@[A-Za-z0-9]+)|([^0-9A-Za-z \\t])|(\\w+:\\/\\/\\S+)", " ", tweet
             ).split()
         )
 
