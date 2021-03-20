@@ -11,7 +11,6 @@ load_dotenv()
 
 
 class TwitterClient:
-    
     def __init__(self, twitter_user=None):
         self.auth = TwitterAuthenticator().authenticate()
         self.twitter_client = API(self.auth)
