@@ -1,18 +1,15 @@
-from tweepy import API
-from tweepy import Cursor
-from tweepy.streaming import StreamListener
-from tweepy import OAuthHandler
-from tweepy import Stream
-
-import credentials
+from tweepy import API, Cursor, OAuthHandler, Stream, StreamListener
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import re
+import os
 
 from textblob import TextBlob
+from dotenv import load_dotenv
 
+load_dotenv()
 
 class TwitterClient:
     def __init__(self, twitter_user=None):
@@ -51,8 +48,8 @@ class TwitterClient:
 
 class TwitterAuthenticator:
     def authenticate(self):
-        auth = OAuthHandler(credentials.CONSUMER_KEY, credentials.CONSUMER_SECRET)
-        auth.set_access_token(credentials.ACCESS_TOKEN, credentials.ACCESS_TOKEN_SECRET)
+        auth = OAuthHandler(os.getenv('CONSUMER_KEY'), os.getenv('CONSUMER_SECRET'))
+        auth.set_access_token(os.getenv('ACCESS_TOKEN'), os.getenv('ACCESS_TOKEN_SECRET'))
         return auth
 
 
