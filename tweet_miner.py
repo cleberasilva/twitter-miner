@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 from textblob import TextBlob
 from tweepy import API, Cursor, OAuthHandler, Stream, StreamListener
 
-
 load_dotenv()
 
 
