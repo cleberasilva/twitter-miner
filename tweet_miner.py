@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 from textblob import TextBlob
 from tweepy import API, Cursor, OAuthHandler, Stream, StreamListener
 
+import tweet_nlp
+
 load_dotenv()
 
 
@@ -127,18 +129,25 @@ class TweetAnalyzer:
 
 
 if __name__ == "__main__":
+    pd.set_option("display.max_rows", None)
+    pd.set_option("display.max_columns", None)
+    pd.set_option("display.width", None)
+    pd.set_option("display.max_colwidth", None)
 
     twitter_client = TwitterClient()
     tweet_analyzer = TweetAnalyzer()
 
     api = twitter_client.get_twitter_client_api()
 
-    tweets = api.user_timeline(screen_name="pycon", count=200)
+    tweets = api.user_timeline(screen_name="pycon", count=100)
 
     df = tweet_analyzer.tweets_to_dataframe(tweets)
 
+    processor = tweet_nlp.Processor()
+
     df["sentiment"] = np.array(
-        [tweet_analyzer.analyze_sentiment(tweet) for tweet in df["tweet"]]
+        # [tweet_analyzer.analyze_sentiment(tweet) for tweet in df["tweet"]]
+        [processor.analyze_sentiment(tweet) for tweet in df["tweet"]]
     )
 
     print(df.head(10))
