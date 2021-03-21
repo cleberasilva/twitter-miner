@@ -3,11 +3,12 @@ import re
 
 import numpy as np
 import pandas as pd
+import tweet_nlp
 from dotenv import load_dotenv
 from textblob import TextBlob
 from tweepy import API, Cursor, OAuthHandler, Stream, StreamListener
 
-import tweet_nlp
+
 
 load_dotenv()
 
