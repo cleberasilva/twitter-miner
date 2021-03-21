@@ -3,3 +3,5 @@
 tweets.json
 
 __pycache__/*
+
+nlp_test.py
